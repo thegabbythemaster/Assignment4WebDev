@@ -11,43 +11,36 @@ class Table extends Component {
     }
   }
 
- /* function addRow(){
-    let rows = document.getElementsByTagName('tr');
-    if(rows.length == 0){
-      let row = document.createElement("tr");
-      let col = document.createElement("td");
-      row.appendChild(col);
-      grid.appendChild(row);
-      numCols++
-      numRows++
-    } else {
-      let row = document.createElement("tr");
-      for(let i = 0; i < numCols; i++){
-        let cell = document.createElement("td");
-        row.appendChild(cell);
-      }
-      grid.appendChild(row);
-      numRows++;
-      //console.log(numRows);
-    }
-}*/
+//DOESNT WORK IF ROWS = 0, IT INCREMENTS IT VALUE BUT DOESNT SEE UNTIL WE CLICK ADD COL
   addRow = () => {
     this.setState(state => {
         return {numRows: state.numRows + 1}
     });
   }
 
+  //DOESNT WORK IF COL = 0, IT INCREMENTS IT VALUE BUT DOESNT SHOW UNTIL WE CLICK ADD ROW
   addColumn = () => {
     this.setState(state => {
         return {numCols: state.numCols + 1}
     });
   }
-//remove row
+//remove row WORKS?
   removeRow = () =>{
+      let currentRow = this.state.numRows;
+      let currentCol = this.state.numCols;
+      currentRow  = currentRow - 1; 
+      if(currentRow === 0){
+          currentCol = 0;
+          this.setState({numCols: currentCol});
+      }
     this.setState(state => {
         return {numRows: state.numRows - 1}
-    }); 
+    });
+    console.log('row', currentRow);
+    console.log('col', currentCol);
   }
+
+
 
   handleColorChange = (event) => {
     this.setState({selectedColor: event.target.value});
