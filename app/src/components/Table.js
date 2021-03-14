@@ -11,6 +11,26 @@ class Table extends Component {
     }
   }
 
+ /* function addRow(){
+    let rows = document.getElementsByTagName('tr');
+    if(rows.length == 0){
+      let row = document.createElement("tr");
+      let col = document.createElement("td");
+      row.appendChild(col);
+      grid.appendChild(row);
+      numCols++
+      numRows++
+    } else {
+      let row = document.createElement("tr");
+      for(let i = 0; i < numCols; i++){
+        let cell = document.createElement("td");
+        row.appendChild(cell);
+      }
+      grid.appendChild(row);
+      numRows++;
+      //console.log(numRows);
+    }
+}*/
   addRow = () => {
     this.setState(state => {
         return {numRows: state.numRows + 1}
@@ -21,6 +41,12 @@ class Table extends Component {
     this.setState(state => {
         return {numCols: state.numCols + 1}
     });
+  }
+//remove row
+  removeRow = () =>{
+    this.setState(state => {
+        return {numRows: state.numRows - 1}
+    }); 
   }
 
   handleColorChange = (event) => {
@@ -42,6 +68,7 @@ class Table extends Component {
       <div>
         <button onClick={this.addRow}>Add Row</button>
         <button onClick={this.addColumn}>Add Column</button>
+        <button onClick={this.removeRow}>Remove Row</button>
         <select onChange={this.handleColorChange}>
           <option value="red">red</option>
           <option value="blue">blue</option>
