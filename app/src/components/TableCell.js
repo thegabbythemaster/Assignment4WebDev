@@ -1,4 +1,5 @@
 function TableCell(props) {
+  
     return <td onClick={props.handleApplyColor}></td>
   }
   
