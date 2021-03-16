@@ -2,8 +2,8 @@ import { Component } from "react";
 import TableRow from "./TableRow";
 
 class Table extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       numRows: 1,
       numCols: 1,
@@ -12,10 +12,15 @@ class Table extends Component {
   }
 
 //DOESNT WORK IF ROWS = 0, IT INCREMENTS IT VALUE BUT DOESNT SEE UNTIL WE CLICK ADD COL
-  addRow = () => {
+  addRow = () => { 
     this.setState(state => {
         return {numRows: state.numRows + 1}
     });
+    if(this.state.numRows <= 0){
+      this.setState({numRows: 1});
+      this.setState({numCols: 0});
+    }
+    console.log('new row ',this.state.numRows);
   }
 
   //DOESNT WORK IF COL = 0, IT INCREMENTS IT VALUE BUT DOESNT SHOW UNTIL WE CLICK ADD ROW
@@ -23,23 +28,37 @@ class Table extends Component {
     this.setState(state => {
         return {numCols: state.numCols + 1}
     });
+    if(this.state.numRows <= 0){
+      this.setState({numRows: 1});
+    }
+    console.log('new col ',this.state.numCols);
   }
 //remove row WORKS?
   removeRow = () =>{
-      let currentRow = this.state.numRows;
-      let currentCol = this.state.numCols;
-      currentRow  = currentRow - 1; 
-      if(currentRow === 0){
-          currentCol = 0;
-          this.setState({numCols: currentCol});
+      if(this.state.numRows <= 1){
+        this.setState(state =>{return{numCols: state.numCols = 1}});
       }
-    this.setState(state => {
+      this.setState(state => {
         return {numRows: state.numRows - 1}
     });
-    console.log('row', currentRow);
-    console.log('col', currentCol);
+    console.log('row', this.state.numRows);
+    console.log('col', this.state.numCols);
   }
 
+
+//remove column
+  removeColumn = () =>{
+    if(this.state.numCols <= 1){
+      console.log('entered');
+      //this.setState({numCols: 1});
+      this.setState(state => {return {numCols: state.numCols = 1, numRows: state.numRows = 1}});
+    }
+  this.setState(state => {
+      return {numCols: state.numCols - 1}
+  });
+  console.log('row', this.state.numRows);
+  console.log('col', this.state.numCols);
+}
 
 
   handleColorChange = (event) => {
@@ -62,6 +81,7 @@ class Table extends Component {
         <button onClick={this.addRow}>Add Row</button>
         <button onClick={this.addColumn}>Add Column</button>
         <button onClick={this.removeRow}>Remove Row</button>
+        <button onClick={this.removeColumn}>Remove Column</button>
         <select onChange={this.handleColorChange}>
           <option value="red">red</option>
           <option value="blue">blue</option>
