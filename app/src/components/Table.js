@@ -16,10 +16,6 @@ class Table extends Component {
     this.setState(state => {
         return {numRows: state.numRows + 1}
     });
-    if(this.state.numRows <= 0){
-      this.setState({numRows: 1});
-      this.setState({numCols: 0});
-    }
     console.log('new row ',this.state.numRows);
   }
 
@@ -28,19 +24,18 @@ class Table extends Component {
     this.setState(state => {
         return {numCols: state.numCols + 1}
     });
-    if(this.state.numRows <= 0){
-      this.setState({numRows: 1});
+    if(this.state.numRows === 0){
+      this.addRow();
     }
     console.log('new col ',this.state.numCols);
   }
-//remove row WORKS?
+
   removeRow = () =>{
-      if(this.state.numRows <= 1){
-        this.setState(state =>{return{numCols: state.numCols = 1}});
+      if (this.state.numRows > 1) {
+        this.setState(state => {
+          return {numRows: state.numRows - 1}
+        });
       }
-      this.setState(state => {
-        return {numRows: state.numRows - 1}
-    });
     console.log('row', this.state.numRows);
     console.log('col', this.state.numCols);
   }
@@ -48,14 +43,19 @@ class Table extends Component {
 
 //remove column
   removeColumn = () =>{
-    if(this.state.numCols <= 1){
-      console.log('entered');
-      //this.setState({numCols: 1});
-      this.setState(state => {return {numCols: state.numCols = 1, numRows: state.numRows = 1}});
+    //if(this.state.numCols === 1){
+    //  this.setState(state =>{
+    //    return{
+    //      numRows: 0,
+    //      numCols: 0
+    //    }
+    //  });
+    //} else 
+    if(this.state.numCols > 1) {
+      this.setState(state => {
+        return {numCols: state.numCols - 1}
+      });
     }
-  this.setState(state => {
-      return {numCols: state.numCols - 1}
-  });
   console.log('row', this.state.numRows);
   console.log('col', this.state.numCols);
 }
