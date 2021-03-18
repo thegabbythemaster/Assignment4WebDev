@@ -86,6 +86,7 @@ class Table extends Component {
           <option value="red">red</option>
           <option value="blue">blue</option>
           <option value="yellow">yellow</option>
+          <option value="#9BF6FF">baby blue</option>
         </select>
         <table>
           {rows}
