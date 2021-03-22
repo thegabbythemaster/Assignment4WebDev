@@ -1,3 +1,7 @@
+# Team Foodies - Samantha Ngo, Kristy Lau, Gabby Gonzalez, Nirmala Kuhl
+### Practical Web Development
+### 2021-03-21
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br>
