@@ -11,7 +11,7 @@ class Table extends Component {
     }
   }
 
-//DOESNT WORK IF ROWS = 0, IT INCREMENTS IT VALUE BUT DOESNT SEE UNTIL WE CLICK ADD COL
+  // Add row to the grid
   addRow = () => { 
     this.setState(state => {
         return {numRows: state.numRows + 1}
@@ -19,7 +19,7 @@ class Table extends Component {
     console.log('new row ',this.state.numRows);
   }
 
-  //DOESNT WORK IF COL = 0, IT INCREMENTS IT VALUE BUT DOESNT SHOW UNTIL WE CLICK ADD ROW
+  // Add column to the grid
   addColumn = () => {
     this.setState(state => {
         return {numCols: state.numCols + 1}
@@ -30,6 +30,7 @@ class Table extends Component {
     console.log('new col ',this.state.numCols);
   }
 
+  // Remove row from the grid
   removeRow = () =>{
     if (this.state.numRows > 1) {
       this.setState(state => {
@@ -40,7 +41,7 @@ class Table extends Component {
     console.log('col', this.state.numCols);
   }
 
-  //remove column
+  // Remove column from the grid
   removeColumn = () =>{
     if(this.state.numCols > 1) {
       this.setState(state => {
@@ -68,7 +69,12 @@ class Table extends Component {
 
   // Clear all cells to white
   clearAll = () =>{
-    // code here
+    let cells = document.getElementsByTagName("td")
+
+    // Iterate through each cell and change backgroundColor to white
+    for(let i = 0; i < cells.length; i++) {
+      cells[i].style.backgroundColor = "white";
+    }
   }
 
   handleColorChange = (event) => {
