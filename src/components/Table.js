@@ -7,7 +7,7 @@ class Table extends Component {
     this.state = {
       numRows: 1,
       numCols: 1,
-      selectedColor: "00F5D4"
+      selectedColor: "#9B5DE5"
     }
   }
 
@@ -53,13 +53,12 @@ class Table extends Component {
 
   // Fill all uncolored cells with the currently selected color
   fillUncolored = () =>{
-    if(this.state.numCols > 1) {
-      this.setState(state => {
-        return {numCols: state.numCols - 1}
-      });
+    let cells = document.getElementsByTagName("td")
+    for(let i = 0; i < cells.length; i++){
+      if(!cells[i].style.backgroundColor || cells[i].style.backgroundColor === "white"){
+        cells[i].style.backgroundColor = this.state.selectedColor;
+      }
     }
-    console.log('row', this.state.numRows);
-    console.log('col', this.state.numCols);
   }
 
   // Fill all cells with the currently selected color
