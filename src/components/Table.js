@@ -7,7 +7,7 @@ class Table extends Component {
     this.state = {
       numRows: 1,
       numCols: 1,
-      selectedColor: "red"
+      selectedColor: "#9B5DE5"
     }
   }
 
@@ -31,35 +31,45 @@ class Table extends Component {
   }
 
   removeRow = () =>{
-      if (this.state.numRows > 1) {
-        this.setState(state => {
-          return {numRows: state.numRows - 1}
-        });
-      }
+    if (this.state.numRows > 1) {
+      this.setState(state => {
+        return {numRows: state.numRows - 1}
+      });
+    }
     console.log('row', this.state.numRows);
     console.log('col', this.state.numCols);
   }
 
-
-//remove column
+  //remove column
   removeColumn = () =>{
-    //if(this.state.numCols === 1){
-    //  this.setState(state =>{
-    //    return{
-    //      numRows: 0,
-    //      numCols: 0
-    //    }
-    //  });
-    //} else 
     if(this.state.numCols > 1) {
       this.setState(state => {
         return {numCols: state.numCols - 1}
       });
     }
-  console.log('row', this.state.numRows);
-  console.log('col', this.state.numCols);
-}
+    console.log('row', this.state.numRows);
+    console.log('col', this.state.numCols);
+  }
 
+  // Fill all uncolored cells with the currently selected color
+  fillUncolored = () =>{
+    let cells = document.getElementsByTagName("td")
+    for(let i = 0; i < cells.length; i++){
+      if(!cells[i].style.backgroundColor || cells[i].style.backgroundColor === "white"){
+        cells[i].style.backgroundColor = this.state.selectedColor;
+      }
+    }
+  }
+
+  // Fill all cells with the currently selected color
+  fillAll = () =>{
+    // code here
+  }
+
+  // Clear all cells to white
+  clearAll = () =>{
+    // code here
+  }
 
   handleColorChange = (event) => {
     this.setState({selectedColor: event.target.value});
@@ -82,11 +92,15 @@ class Table extends Component {
         <button onClick={this.addColumn}>Add Column</button>
         <button onClick={this.removeRow}>Remove Row</button>
         <button onClick={this.removeColumn}>Remove Column</button>
+        <button onClick={this.fillUncolored}>Fill All Uncolored</button>
+        <button onClick={this.fillAll}>Fill All</button>
+        <button onClick={this.clearAll}>Clear All</button>
         <select onChange={this.handleColorChange}>
-          <option value="red">red</option>
-          <option value="blue">blue</option>
-          <option value="yellow">yellow</option>
-          <option value="#9BF6FF">baby blue</option>
+          <option value="#9B5DE5">Amethyst</option>
+          <option value="#F15BB5">Magenta Crayola</option>
+          <option value="#FEE440">Minion Yellow</option>
+          <option value="#00BBF9">Capri</option>
+          <option value="#00F5D4">Sea Green Crayola</option>
         </select>
         <table>
           {rows}
