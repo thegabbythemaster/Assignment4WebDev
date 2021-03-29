@@ -61,10 +61,15 @@ class Table extends Component {
       }
     }
   }
+  
+  
 
   // Fill all cells with the currently selected color
   fillAll = () =>{
-    // code here
+    let cells = document.getElementsByTagName("td")
+    for(let i = 0; i < cells.length; i++){
+		cells[i].style.backgroundColor = this.state.selectedColor;
+    }
   }
 
   // Clear all cells to white
